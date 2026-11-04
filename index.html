@@ -7,7 +7,9 @@
 <title>Happy Birthday Apple 🍎</title>
 
 <style>
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
@@ -20,7 +22,7 @@ body {
 }
 
 section {
-  background: #ffffffdc;
+  background: #ffffffdf;
   margin: 25px auto;
   padding: 30px 20px;
   width: 92%;
@@ -34,7 +36,9 @@ h1 {
   color: #d83d79;
 }
 
-h2 { color: #d83d79; }
+h2 {
+  color: #d83d79;
+}
 
 p {
   line-height: 1.7;
@@ -45,11 +49,16 @@ button {
   background: #ed6595;
   color: white;
   border: 0;
-  padding: 14px 25px;
+  padding: 14px 22px;
   border-radius: 30px;
   font-size: 16px;
   cursor: pointer;
-  margin: 10px;
+  margin: 8px;
+  transition: transform .2s;
+}
+
+button:hover {
+  transform: scale(1.06);
 }
 
 input {
@@ -61,7 +70,9 @@ input {
   max-width: 90%;
 }
 
-.hidden { display: none !important; }
+.hidden {
+  display: none !important;
+}
 
 .timer {
   display: flex;
@@ -116,6 +127,61 @@ input {
   border-radius: 18px;
   line-height: 2;
   text-align: left;
+  margin-top: 15px;
+}
+
+.note-card {
+  background: #fff0f5;
+  border: 2px solid #ffd0e0;
+  border-radius: 18px;
+  padding: 20px 10px;
+  min-height: 85px;
+  font-size: 17px;
+}
+
+#noteMessage {
+  text-align: center;
+  min-height: 65px;
+}
+
+.bubble-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  padding: 25px 5px;
+  min-height: 180px;
+}
+
+.bubble {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 25%, #fff, #ff9fc5);
+  box-shadow: 0 5px 20px #e96b9c55;
+  font-size: 30px;
+  animation: bubbleFloat 2s infinite alternate;
+}
+
+@keyframes bubbleFloat {
+  from { transform: translateY(0); }
+  to { transform: translateY(-12px); }
+}
+
+.bubble.popped {
+  display: none;
+}
+
+#bubbleMessage {
+  background: #fff0f5;
+  padding: 18px;
+  border-radius: 15px;
+  min-height: 55px;
+}
+
+#finalMessage {
+  text-align: center;
 }
 
 .heart {
@@ -123,6 +189,7 @@ input {
   bottom: -30px;
   animation: float 6s linear forwards;
   pointer-events: none;
+  z-index: 10;
 }
 
 @keyframes float {
@@ -136,6 +203,7 @@ input {
 
 <body>
 
+<!-- COUNTDOWN -->
 <section id="countdown" class="hidden">
   <h1>Something Special Is Coming 💗</h1>
   <h2>For Apple 🍎</h2>
@@ -151,6 +219,7 @@ input {
   <p>Midnight magic begins on 9 November! 🎂</p>
 </section>
 
+<!-- PASSWORD -->
 <section id="lock">
   <h1>🔐 Secret Surprise</h1>
   <p>Apple, enter your special password!</p>
@@ -164,17 +233,20 @@ input {
 
 <div id="birthday" class="hidden">
 
+  <!-- WELCOME -->
   <section>
     <h1>Happy Birthday Apple! 🍎</h1>
     <p>
       Today is your special day! May your life always be
       filled with happiness, love and beautiful memories. 💗
     </p>
+
     <button onclick="music()" id="musicBtn">
       🎵 Play Birthday Music
     </button>
   </section>
 
+  <!-- CAKE -->
   <section>
     <h2>Your Birthday Cake 🎂</h2>
     <div class="cake">🎂</div>
@@ -182,9 +254,10 @@ input {
     <button onclick="confetti()">Make a Wish 🎉</button>
   </section>
 
+  <!-- MEMORIES -->
   <section>
     <h2>Beautiful Memories 📸</h2>
-    <p>Temporary pictures for now. Your real photos can be added later!</p>
+    <p>Our little collection of beautiful moments!</p>
 
     <div class="gallery">
       <div class="photo">🌷<small>Sweet Memories</small></div>
@@ -194,6 +267,7 @@ input {
     </div>
   </section>
 
+  <!-- LOVE MESSAGE -->
   <section>
     <h2>A Message For You ❤️</h2>
     <p>
@@ -203,9 +277,11 @@ input {
     <p>Keep shining, Apple! 🍎💕</p>
   </section>
 
+  <!-- LETTER -->
   <section>
     <h2>A Little Surprise Letter 💌</h2>
-    <button onclick="document.getElementById('letter').classList.toggle('hidden')">
+
+    <button onclick="toggleLetter()">
       Open Your Letter
     </button>
 
@@ -214,8 +290,7 @@ input {
 
       Happy Birthday!<br><br>
 
-      I hope this little surprise brings a big smile to your face.<br><br>
-
+      I hope this little surprise brings a big smile to your face.
       May your dreams come true, your heart stay happy,
       and your life be full of unforgettable moments.<br><br>
 
@@ -227,16 +302,90 @@ input {
     </div>
   </section>
 
+  <!-- LITTLE NOTES -->
+  <section>
+    <h2>💌 Little Notes For You</h2>
+    <p>Four little reminders for someone special. Open them one by one! ❤️</p>
+
+    <div class="gallery">
+      <button class="note-card" onclick="showNote(0)">💗<br>Note 1</button>
+      <button class="note-card" onclick="showNote(1)">🌷<br>Note 2</button>
+      <button class="note-card" onclick="showNote(2)">🧸<br>Note 3</button>
+      <button class="note-card" onclick="showNote(3)">💝<br>Note 4</button>
+    </div>
+
+    <div id="noteMessage" class="letter">
+      Choose a little note to open 💕
+    </div>
+  </section>
+
+  <!-- POP THE BUBBLES -->
+  <section>
+    <h2>🫧 Pop the Love Bubbles!</h2>
+    <p>Every bubble has a little message for you. Tap them all! 💗</p>
+
+    <div id="bubbleArea" class="bubble-area">
+      <button class="bubble" onclick="popBubble(this,0)">💗</button>
+      <button class="bubble" onclick="popBubble(this,1)">💕</button>
+      <button class="bubble" onclick="popBubble(this,2)">💖</button>
+      <button class="bubble" onclick="popBubble(this,3)">🌸</button>
+      <button class="bubble" onclick="popBubble(this,4)">✨</button>
+      <button class="bubble" onclick="popBubble(this,5)">💝</button>
+    </div>
+
+    <p id="bubbleMessage">Tap a bubble to discover a message! 🥰</p>
+    <p id="bubbleCount">0 / 6 bubbles popped</p>
+  </section>
+
+  <!-- FINAL SURPRISE -->
+  <section id="finalSurprise" class="hidden">
+    <h1>One Last Thing, Apple... ❤️</h1>
+    <div style="font-size:65px">💗</div>
+
+    <p>
+      Out of all the little surprises today,
+      I hope you remember just how special you are.
+      You deserve endless happiness, beautiful memories
+      and all the love in this world.
+    </p>
+
+    <button onclick="openFinalMessage()">
+      Open My Heart ❤️
+    </button>
+
+    <div id="finalMessage" class="letter hidden">
+      Dear Apple ❤️,<br><br>
+
+      Happy Birthday! 🍎<br><br>
+
+      I wish I could put all the happiness in the world
+      into one little gift for you.<br><br>
+
+      Never stop smiling, never stop dreaming,
+      and never forget how special you are.<br><br>
+
+      May this new chapter of your life be filled with
+      laughter, peace, success and unforgettable memories.<br><br>
+
+      You deserve the very best, today and always.<br><br>
+
+      Sending you the biggest hug and lots of love! 💗<br><br>
+
+      Forever special. ❤️
+    </div>
+  </section>
+
 </div>
 
 <script>
 
-// TEST MODE: true = open password screen immediately
-// BIRTHDAY MODE: change true to false before sharing
+// TEST MODE
+// true = open password screen immediately
+// false = show countdown until birthday
 
 const TEST_MODE = true;
 
-// Original birthday: 9 November 2026 at midnight
+// Birthday: 9 November 2026 at midnight
 const target = new Date(2026, 10, 9, 0, 0, 0);
 
 function timer() {
@@ -268,12 +417,14 @@ if (!TEST_MODE) {
   setInterval(timer, 1000);
 }
 
+// PASSWORD
 function unlock() {
   let p = document.getElementById("pass").value.trim().toUpperCase();
 
   if (p === "APPLEENA") {
     document.getElementById("lock").classList.add("hidden");
     document.getElementById("birthday").classList.remove("hidden");
+
     hearts();
     confetti();
   } else {
@@ -286,7 +437,70 @@ document.getElementById("pass").addEventListener("keydown", e => {
   if (e.key === "Enter") unlock();
 });
 
-// Birthday music
+// LETTER
+function toggleLetter() {
+  document.getElementById("letter").classList.toggle("hidden");
+}
+
+// LITTLE NOTES
+const notes = [
+  "Your smile makes ordinary days feel special. 💗",
+  "Never forget how amazing you are. 🌷",
+  "You deserve every beautiful thing in life. 🧸",
+  "Sending you a little reminder that you are loved. 💝"
+];
+
+function showNote(index) {
+  document.getElementById("noteMessage").textContent = notes[index];
+}
+
+// POP THE BUBBLES
+const bubbleMessages = [
+  "You are someone's favourite person! 💗",
+  "Keep smiling, you look beautiful! 🌸",
+  "You deserve the whole universe! ✨",
+  "Sending you a thousand hugs! 🧸",
+  "May all your dreams come true! 💖",
+  "You make life a little sweeter! 🍭"
+];
+
+let poppedCount = 0;
+
+function popBubble(button, index) {
+  if (button.classList.contains("popped")) return;
+
+  button.classList.add("popped");
+
+  document.getElementById("bubbleMessage").textContent =
+    bubbleMessages[index];
+
+  poppedCount++;
+
+  document.getElementById("bubbleCount").textContent =
+    poppedCount + " / 6 bubbles popped";
+
+  if (poppedCount === 6) {
+    document.getElementById("bubbleMessage").textContent =
+      "You found all the little messages! One last surprise is waiting below! ❤️";
+
+    document.getElementById("finalSurprise").classList.remove("hidden");
+
+    setTimeout(() => {
+      document.getElementById("finalSurprise").scrollIntoView({
+        behavior: "smooth"
+      });
+    }, 700);
+
+    confetti();
+  }
+}
+
+// FINAL MESSAGE
+function openFinalMessage() {
+  document.getElementById("finalMessage").classList.toggle("hidden");
+}
+
+// MUSIC
 let audio = null;
 let playing = false;
 let musicTimer;
@@ -328,7 +542,7 @@ function music() {
   btn.textContent = "⏸ Pause Music";
 }
 
-// Floating hearts
+// FLOATING HEARTS
 function hearts() {
   setInterval(() => {
     let heart = document.createElement("div");
@@ -336,6 +550,7 @@ function hearts() {
     heart.textContent = ["💗","💕","💖","✨","🌸"][
       Math.floor(Math.random() * 5)
     ];
+
     heart.style.left = Math.random() * 100 + "vw";
     heart.style.fontSize = "25px";
 
@@ -344,7 +559,7 @@ function hearts() {
   }, 500);
 }
 
-// Celebration confetti
+// CONFETTI
 function confetti() {
   for (let i = 0; i < 70; i++) {
     let el = document.createElement("div");
@@ -352,6 +567,7 @@ function confetti() {
     el.textContent = ["🎉","✨","💗","🎊"][
       Math.floor(Math.random() * 4)
     ];
+
     el.style.left = Math.random() * 100 + "vw";
     el.style.bottom = "-20px";
     el.style.animationDuration = (3 + Math.random() * 4) + "s";
@@ -362,5 +578,6 @@ function confetti() {
 }
 
 </script>
+
 </body>
 </html>
