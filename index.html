@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday ❤️</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-family: Georgia, serif;
+  background: linear-gradient(135deg,#ffd6e7,#d8c5ff);
+  color: #96365f;
+}
+.card {
+  background: white;
+  padding: 40px 25px;
+  border-radius: 25px;
+  margin: 20px;
+  max-width: 450px;
+  box-shadow: 0 10px 35px #9b548544;
+}
+h1 { font-size: 38px; }
+p { font-size: 19px; line-height: 1.6; }
+button {
+  background: #e75480;
+  color: white;
+  border: 0;
+  padding: 14px 25px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 17px;
+}
+#message { margin-top: 20px; }
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>🎂 Happy Birthday! 🎀</h1>
+  <p>Today is your special day!</p>
+  <p>You deserve all the happiness in the world. ❤️</p>
+  <button onclick="surprise()">Open Your Surprise 💌</button>
+  <p id="message"></p>
+</div>
+<script>
+function surprise() {
+  document.getElementById("message").innerHTML =
+  "You are very special! Stay happy always! 💗🎉";
+}
+</script>
+</body>
+</html>
