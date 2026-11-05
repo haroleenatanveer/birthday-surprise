@@ -507,62 +507,7 @@ function openFinalMessage() {
   document.getElementById("finalMessage").classList.toggle("hidden");
 }
 
-// MUSIC
-let audio = null;
-let playing = false;
-let musicTimer;
 
-
-<h2>🎵 A Special Song For You ❤️</h2>
-<p>Some songs say what words cannot. This one is for you, Apple! 💗</p>
-
-<div style="max-width:500px;margin:20px auto;">
-  <iframe
-    width="100%"
-    height="200"
-    src="https://www.youtube.com/embed/cStOvI74hQo"
-    title="Dekha Hi Nahi - Osho Jain"
-    frameborder="0"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-    allowfullscreen>
-  </iframe>
-</div>
-
-  const btn = document.getElementById("musicBtn");
-
-  if (playing) {
-    clearInterval(musicTimer);
-    playing = false;
-    btn.textContent = "🎵 Play Birthday Music";
-    return;
-  }
-
-  audio = audio || new (window.AudioContext || window.webkitAudioContext)();
-  audio.resume();
-
-  let notes = [523,587,659,523,698,659,587,523];
-  let i = 0;
-
-  function play() {
-    let osc = audio.createOscillator();
-    let gain = audio.createGain();
-
-    osc.frequency.value = notes[i++ % notes.length];
-    gain.gain.setValueAtTime(.1, audio.currentTime);
-    gain.gain.exponentialRampToValueAtTime(.001, audio.currentTime + .35);
-
-    osc.connect(gain);
-    gain.connect(audio.destination);
-
-    osc.start();
-    osc.stop(audio.currentTime + .4);
-  }
-
-  play();
-  musicTimer = setInterval(play, 450);
-  playing = true;
-  btn.textContent = "⏸ Pause Music";
-}
 
 // FLOATING HEARTS
 function hearts() {
